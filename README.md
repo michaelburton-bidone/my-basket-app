@@ -30,6 +30,10 @@ The application consists of the following microservices:
    ```bash
    npm run microservices:start
    ```
+   ## for windows 
+   ```bash
+   npm run microservices:start:win
+   ```
 
 3. **Start the frontend (in a new terminal):**
    ```bash
