@@ -1,0 +1,32 @@
+{
+  "name": "my-basket-app-ui-tests",
+  "version": "1.0.0",
+  "description": "Playwright UI testing framework for My-Basket-App",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "test:headed": "playwright test --headed",
+    "test:chromium": "playwright test --project=chromium",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:cart": "playwright test --grep @cart",
+    "report": "playwright show-report",
+    "codegen": "playwright codegen http://localhost:9002"
+  },
+  "keywords": [
+    "playwright",
+    "testing",
+    "e2e",
+    "ui-testing"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.45.0",
+    "@types/node": "^20.12.0",
+    "typescript": "^5.3.3",
+    "eslint": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^7.1.1",
+    "@typescript-eslint/parser": "^7.1.1"
+  }
+}

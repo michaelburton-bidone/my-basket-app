@@ -39,7 +39,7 @@ export function CartItemCard({ item }: CartItemCardProps) {
   };
 
   return (
-    <Card className="flex items-center p-4 space-x-4 shadow-sm">
+    <Card className="flex items-center p-4 space-x-4 shadow-sm" data-testid={`cart-item-${item.id}`}>
       <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
         <Image
           src={item.image}
@@ -48,17 +48,18 @@ export function CartItemCard({ item }: CartItemCardProps) {
           sizes="80px"
           className="object-cover"
           data-ai-hint={item.dataAiHint}
+          data-testid={`cart-item-image-${item.id}`}
         />
       </div>
       <CardContent className="flex flex-1 flex-col justify-between p-0">
         <div>
-          <h3 className="text-md font-medium text-foreground">{item.name}</h3>
-          <p className="text-sm text-muted-foreground">
+          <h3 className="text-md font-medium text-foreground" data-testid={`cart-item-name-${item.id}`}>{item.name}</h3>
+          <p className="text-sm text-muted-foreground" data-testid={`cart-item-quantity-${item.id}`}>
             Quantity: {item.quantity}
           </p>
         </div>
         <div className="flex items-center justify-between mt-2">
-          <p className="text-md font-semibold text-primary">
+          <p className="text-md font-semibold text-primary" data-testid={`cart-item-price-${item.id}`}>
             ${(item.price * item.quantity).toFixed(2)}
           </p>
           <Button
@@ -67,6 +68,7 @@ export function CartItemCard({ item }: CartItemCardProps) {
             onClick={handleRemoveItem}
             disabled={isRemoving}
             className="text-destructive hover:bg-destructive/10"
+            data-testid={`remove-item-${item.id}`}
           >
             <Trash2 className="h-5 w-5" />
             <span className="sr-only">Remove item</span>
