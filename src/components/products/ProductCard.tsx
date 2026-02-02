@@ -40,7 +40,7 @@ export function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <Card className="flex flex-col overflow-hidden rounded-lg shadow-lg transition-all hover:shadow-xl">
+    <Card className="flex flex-col overflow-hidden rounded-lg shadow-lg transition-all hover:shadow-xl" data-testid="product-item">
       <CardHeader className="p-0">
         <div className="relative aspect-[3/2] w-full">
           <Image
@@ -67,6 +67,7 @@ export function ProductCard({ product }: ProductCardProps) {
           onClick={handleAddToCart} 
           disabled={isLoading}
           className="w-full bg-accent text-accent-foreground hover:bg-accent/90"
+          data-testid={`add-to-cart-btn-${product.id}`}
         >
           <ShoppingCart className="mr-2 h-4 w-4" /> 
           {isLoading ? "Adding..." : "Add to Cart"}
