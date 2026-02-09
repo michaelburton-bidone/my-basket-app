@@ -14,6 +14,12 @@ from typing import Dict, List, Tuple
 import requests
 from datetime import datetime
 
+# Fix Unicode encoding on Windows
+if sys.platform == 'win32':
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
+
 # Configuration
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 MODEL_NAME = os.getenv("OLLAMA_MODEL", "gpt-oss:20b-cloud")
@@ -23,6 +29,9 @@ DEFAULT_TIMEOUT = 120  # seconds
 SEVERITY_REJECT = "REJECT"
 SEVERITY_FLAG = "FLAG"
 SEVERITY_PASS = "PASS"
+
+# File extensions to audit
+AUDIT_EXTENSIONS = {'.ts', '.js', '.py', '.tsx', '.jsx', '.env', '.test.ts', '.spec.ts'}
 
 
 class AIGuard:
@@ -45,6 +54,25 @@ class AIGuard:
         """Check if the target file exists."""
         return Path(file_path).exists() and Path(file_path).is_file()
     
+    def _get_files_in_directory(self, directory: str = ".") -> List[str]:
+        """Recursively find all auditable files in a directory."""
+        files = []
+        path = Path(directory)
+        
+        # Exclude common directories
+        exclude_dirs = {'.git', 'node_modules', '__pycache__', '.venv', 'venv', 'dist', 'build', '.env.local', '.idx', '.vscode', '.next'}
+        
+        for file_path in path.rglob('*'):
+            # Skip excluded directories
+            if any(excluded in file_path.parts for excluded in exclude_dirs):
+                continue
+            
+            # Check if file has auditable extension
+            if file_path.is_file() and file_path.suffix.lower() in AUDIT_EXTENSIONS:
+                files.append(str(file_path))
+        
+        return sorted(files)
+    
     def read_file(self, file_path: str) -> Tuple[bool, str]:
         """Read file content safely."""
         if not self._validate_file_exists(file_path):
@@ -61,13 +89,14 @@ class AIGuard:
         """Build a comprehensive audit prompt for the AI."""
         extension = Path(file_path).suffix.lower()
         
-        prompt = f"""You are a Security Expert specialized in detecting hardcoded secrets and passwords.
+        prompt = f"""You are a Security & Code Quality Expert specialized in detecting hardcoded secrets, passwords, and bad coding practices.
 
 AUDIT FILE: {file_path}
 FILE TYPE: {file_type}
 DATE: {datetime.now().strftime('%Y-%m-%d')}
 
-CRITICAL: Look for ANY of these patterns:
+=== PRIORITY 1: CRITICAL SECURITY ISSUES (REJECT) ===
+Look for ANY of these patterns:
 1. Hardcoded passwords (password=, passwd=, pwd=, pass=)
 2. API Keys and tokens (api_key=, apikey=, token=, secret=, api-token=)
 3. Database credentials (db_password=, database_password=, db_user=)
@@ -77,17 +106,42 @@ CRITICAL: Look for ANY of these patterns:
 7. Encryption keys (encryption_key=, cipher_key=)
 8. Any variable names containing: secret, password, passwd, pwd, key, credential, token, apikey
 
+=== PRIORITY 2: CODE QUALITY & BAD PRACTICES (FLAG) ===
+Look for ANY of these anti-patterns:
+1. ARBITRARY WAITS/TIMEOUTS:
+   - page.waitForTimeout() or waitForTimeout() with hardcoded milliseconds
+   - Thread.sleep() in Java/Kotlin
+   - time.sleep() in Python
+   - sleep() or delay() in any language
+   - Any wait longer than 2 seconds without explanation
+   
+2. FRAGILE TEST PATTERNS:
+   - CSS selectors with version numbers (.button-v1, .login-v2)
+   - Hardcoded selectors without data-testid or role attributes
+   - Selectors based on position or index
+   
+3. BAD TIMEOUT HANDLING:
+   - Missing explicit waits (expect() with timeout)
+   - No retry logic for flaky operations
+   - Hardcoded delays instead of explicit wait conditions
+   
+4. OTHER ANTI-PATTERNS:
+   - Hardcoded URLs, ports, or environment-specific values
+   - Magic numbers without explanation
+   - Repeated code that should be abstracted
+   - Missing error handling or try-catch blocks
+
 ---CODE TO AUDIT---
 {content}
 ---END CODE---
 
 RESPOND WITH ONLY ONE OF THESE VERDICTS:
 
-If you find ANY hardcoded secrets, credentials, or passwords:
+If you find ANY hardcoded secrets, credentials, or passwords (CRITICAL):
 REJECT: [exact line number] - [type of secret found] - [exact line of code]
 
-If you find code issues but no secrets:
-FLAG: [issue type] - [description]
+If you find code quality issues or bad practices (but NO secrets):
+FLAG: [issue type] - [description and line number if applicable]
 
 If no secrets or significant issues:
 PASS
@@ -95,7 +149,9 @@ PASS
 Examples of responses:
 - REJECT: Line 5 - Hardcoded API key detected - API_KEY=sk_test_abc123def456
 - REJECT: Line 3 - Database password found - DATABASE_URL=postgresql://user:fakepassword123@localhost
-- FLAG: Fragile test pattern - waitForTimeout detected
+- FLAG: Arbitrary wait detected - page.waitForTimeout(5000) at line 12 - Replace with explicit expect().toBeVisible({{timeout: 8000}})
+- FLAG: Hardcoded URL - http://localhost:3000 at line 8 - Use environment variable instead
+- FLAG: Fragile CSS selector - .login-submit-button-v1 at line 10 - Use semantic selector instead
 - PASS
 
 YOUR VERDICT (respond with ONLY the verdict, nothing else):"""
@@ -247,14 +303,16 @@ def print_audit_report(result: Dict):
 
 def main():
     """Main entry point."""
-    if len(sys.argv) < 2:
-        print("Usage: python ai_guard.py <file_path> [file_path2] ...")
-        print("\nExample:")
-        print("  python ai_guard.py src/tests/existing.test.ts")
-        print("  python ai_guard.py auth.ts security.ts")
-        sys.exit(1)
+    file_paths = sys.argv[1:] if len(sys.argv) > 1 else None
     
-    file_paths = sys.argv[1:]
+    # If no files specified, scan current directory
+    if not file_paths:
+        guard = AIGuard()
+        file_paths = guard._get_files_in_directory(".")
+        if not file_paths:
+            print("No auditable files found in current directory.")
+            print("Supported extensions: " + ", ".join(sorted(AUDIT_EXTENSIONS)))
+            sys.exit(1)
     
     # Initialize AI Guard
     guard = AIGuard()
