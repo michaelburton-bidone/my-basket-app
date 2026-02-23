@@ -1,3 +1,8 @@
+export interface Discount {
+  percentage: number;
+  endsAt: string;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -5,7 +10,7 @@ export interface Product {
   description: string;
   image: string;
   dataAiHint: string;
-  discount?: number; // 0-100 percentage
+  discount?: Discount | number; // Can be object {percentage, endsAt} or simple number
 }
 
 export interface CartItem extends Product {

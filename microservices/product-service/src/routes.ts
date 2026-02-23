@@ -19,6 +19,11 @@ const PaginationSchema = z.object({
   limit: z.coerce.number().positive().max(100).optional(),
 });
 
+const DiscountSchema = z.object({
+  percentage: z.number().min(0).max(100),
+  endsAt: z.string(),
+});
+
 const CreateProductSchema = z.object({
   name: z.string().min(1),
   price: z.number().positive(),
@@ -27,7 +32,7 @@ const CreateProductSchema = z.object({
   dataAiHint: z.string().min(1),
   category: z.string().optional(),
   inStock: z.boolean().optional(),
-  discount: z.number().min(0).max(100).optional(),
+  discount: z.union([z.number().min(0).max(100), DiscountSchema]).optional(),
 });
 
 const UpdateProductSchema = CreateProductSchema.partial();

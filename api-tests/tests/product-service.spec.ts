@@ -281,9 +281,14 @@ test.describe('Product Service API', () => {
       }
       
       if (product.discount) {
-        expect(typeof product.discount.percentage).toBe('number');
-        if (typeof product.discount.endsAt === 'string') {
-          expect(typeof product.discount.endsAt).toBe('string');
+        // Discount can be either a number or an object with percentage and endsAt
+        if (typeof product.discount === 'number') {
+          expect(typeof product.discount).toBe('number');
+        } else if (typeof product.discount === 'object') {
+          expect(typeof product.discount.percentage).toBe('number');
+          if (product.discount.endsAt) {
+            expect(typeof product.discount.endsAt).toBe('string');
+          }
         }
       }
     });

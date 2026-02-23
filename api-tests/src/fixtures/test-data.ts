@@ -143,16 +143,19 @@ export const invalidAddToCartRequests = {
 
 export const mockCartResponses = {
   emptyCart: {
+    id: 'cart-001',
     userId: testUsers.user1.id,
     items: [],
-    totalPrice: 0,
-    itemCount: 0,
+    totalAmount: 0,
+    totalItems: 0,
   } as Cart,
 
   cartWithOneItem: {
+    id: 'cart-002',
     userId: testUsers.user1.id,
     items: [
       {
+        id: testProducts.apples.id,
         itemId: 'item-001',
         productId: testProducts.apples.productId,
         name: testProducts.apples.name,
@@ -160,14 +163,16 @@ export const mockCartResponses = {
         quantity: 2,
       },
     ],
-    totalPrice: 7.98,
-    itemCount: 1,
+    totalAmount: 7.98,
+    totalItems: 2,
   } as Cart,
 
   cartWithMultipleItems: {
+    id: 'cart-003',
     userId: testUsers.user1.id,
     items: [
       {
+        id: testProducts.apples.id,
         itemId: 'item-001',
         productId: testProducts.apples.productId,
         name: testProducts.apples.name,
@@ -175,6 +180,7 @@ export const mockCartResponses = {
         quantity: 2,
       },
       {
+        id: testProducts.eggs.id,
         itemId: 'item-002',
         productId: testProducts.eggs.productId,
         name: testProducts.eggs.name,
@@ -182,6 +188,7 @@ export const mockCartResponses = {
         quantity: 3,
       },
       {
+        id: testProducts.almondMilk.id,
         itemId: 'item-003',
         productId: testProducts.almondMilk.productId,
         name: testProducts.almondMilk.name,
@@ -189,8 +196,8 @@ export const mockCartResponses = {
         quantity: 1,
       },
     ],
-    totalPrice: 40.76,
-    itemCount: 3,
+    totalAmount: 40.76,
+    totalItems: 6,
   } as Cart,
 };
 

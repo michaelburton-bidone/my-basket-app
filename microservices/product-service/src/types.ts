@@ -1,3 +1,8 @@
+export interface Discount {
+  percentage: number;
+  endsAt: string;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -7,7 +12,7 @@ export interface Product {
   dataAiHint: string;
   category?: string;
   inStock?: boolean;
-  discount?: number; // 0-100 percentage
+  discount?: Discount | number; // Can be object {percentage, endsAt} or simple number
   createdAt?: Date;
   updatedAt?: Date;
 }

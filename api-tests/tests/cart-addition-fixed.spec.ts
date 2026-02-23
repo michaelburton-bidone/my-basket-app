@@ -246,9 +246,9 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
     test('should accumulate prices when adding multiple items', async ({
       cartAPI,
     }) => {
-      await test.step('Add first product and verify price', async () => {
-        const userId = 'test-user-accum-' + Date.now();
+      const userId = 'test-user-accum-' + Date.now();
 
+      await test.step('Add first product and verify price', async () => {
         // Add first item: 2 * $3.99 = $7.98
         const priceAfterFirst = await cartAPI.addItemToCart(userId, {
           productId: testProducts.apples.id,
@@ -261,13 +261,6 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
       });
 
       await test.step('Add second product and verify cumulative price', async () => {
-        const userId = 'test-user-accum-' + Date.now();
-        // Redo first item for step isolation
-        const priceAfterFirst = await cartAPI.addItemToCart(userId, {
-          productId: testProducts.apples.id,
-          quantity: 2,
-        });
-
         // Add second item: 1 * $5.99 = $5.99
         const priceAfterSecond = await cartAPI.addItemToCart(userId, {
           productId: testProducts.eggs.id,
@@ -276,8 +269,6 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
         // Auto-retrying assertions verify price accumulation
         expect(priceAfterSecond.data).toBeDefined();
         expect(priceAfterSecond.data?.totalAmount).toBeDefined();
-        expect(priceAfterFirst.data?.totalAmount).toBeDefined();
-        expect(priceAfterSecond.data?.totalAmount).toBeGreaterThan(priceAfterFirst.data?.totalAmount!);
         // Total should be $13.97 (7.98 + 5.99) with floating point precision
         expect(priceAfterSecond.data?.totalAmount).toBeCloseTo(13.97, 2);
       });

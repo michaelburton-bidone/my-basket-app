@@ -33,25 +33,28 @@ export interface PaginatedResponse<T> {
  */
 
 export interface Product {
-  productId: string;
+  id: string;
+  productId?: string; // For backward compatibility
   name: string;
   price: number;
-  quantity: number;
-  category?: string;
   description?: string;
+  image?: string;
+  dataAiHint?: string;
+  category?: string;
 }
 
 export interface CartItem extends Product {
-  itemId?: string;
+  quantity: number;
   addedAt?: string;
   updatedAt?: string;
 }
 
 export interface Cart {
+  id: string;
   userId: string;
   items: CartItem[];
-  totalPrice: number;
-  itemCount: number;
+  totalAmount: number;
+  totalItems: number;
   createdAt?: string;
   updatedAt?: string;
 }
