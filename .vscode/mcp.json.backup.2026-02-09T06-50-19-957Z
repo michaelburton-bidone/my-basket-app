@@ -1,0 +1,16 @@
+{
+  "servers": {
+    "democratize-quality": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "@democratize-quality/mcp-server@latest"
+      ],
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "OUTPUT_DIR": "./api-test-reports"
+      }
+    }
+  },
+  "inputs": []
+}

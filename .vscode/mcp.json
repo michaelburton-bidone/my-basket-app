@@ -1,0 +1,27 @@
+{
+"servers": {
+"democratize-quality": {
+"type": "stdio",
+"command": "npx",
+"args": [
+"@democratize-quality/mcp-server@latest"
+],
+"cwd": "${workspaceFolder}",
+"env": {
+"OUTPUT_DIR": "./api-test-reports"
+}
+},
+"accessibility-mcp": {
+"command": "npx",
+"args": [
+"@democratize-quality/accessibility-mcp@latest",
+"--output-dir",
+"/Users/user-name/Downloads/my-basket-app/accessibility-reports",
+"--headless",
+"false"
+],
+"type": "stdio"
+}
+},
+"inputs": []
+}

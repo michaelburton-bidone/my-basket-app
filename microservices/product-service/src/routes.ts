@@ -27,6 +27,7 @@ const CreateProductSchema = z.object({
   dataAiHint: z.string().min(1),
   category: z.string().optional(),
   inStock: z.boolean().optional(),
+  discount: z.number().min(0).max(100).optional(),
 });
 
 const UpdateProductSchema = CreateProductSchema.partial();

@@ -24,14 +24,17 @@ export class CartAPI extends BaseAPI {
   /**
    * Get cart items for a user
    */
-  async getCartItems(userId: string): Promise<Cart> {
+  async getCartItems(userId: string): Promise<CartResponse> {
     logger.info(`Getting cart items for user: ${userId}`);
 
     const response = await this.get<Cart>(
       `/api/cart/${userId}`
     );
 
-    return response.data!;
+    return {
+      success: response.status === 200,
+      data: response.data!,
+    };
   }
 
   /**
@@ -40,7 +43,7 @@ export class CartAPI extends BaseAPI {
   async addItemToCart(
     userId: string,
     item: AddToCartRequest
-  ): Promise<Cart> {
+  ): Promise<CartResponse> {
     logger.info(`Adding item to cart for user: ${userId}`, item);
 
     const response = await this.post<Cart>(
@@ -48,7 +51,10 @@ export class CartAPI extends BaseAPI {
       item
     );
 
-    return response.data!;
+    return {
+      success: response.status === 200,
+      data: response.data!,
+    };
   }
 
   /**
@@ -58,7 +64,7 @@ export class CartAPI extends BaseAPI {
     userId: string,
     productId: string,
     quantity: number
-  ): Promise<Cart> {
+  ): Promise<CartResponse> {
     logger.info(
       `Updating cart item: ${productId} for user: ${userId} with quantity: ${quantity}`
     );
@@ -68,7 +74,10 @@ export class CartAPI extends BaseAPI {
       { quantity }
     );
 
-    return response.data!;
+    return {
+      success: response.status === 200,
+      data: response.data!,
+    };
   }
 
   /**
@@ -77,7 +86,7 @@ export class CartAPI extends BaseAPI {
   async removeItemFromCart(
     userId: string,
     productId: string
-  ): Promise<Cart> {
+  ): Promise<CartResponse> {
     logger.info(
       `Removing item: ${productId} from cart for user: ${userId}`
     );
@@ -86,33 +95,47 @@ export class CartAPI extends BaseAPI {
       `/api/cart/${userId}/items/${productId}`
     );
 
-    return response.data!;
+    return {
+      success: response.status === 200,
+      data: response.data!,
+    };
   }
 
   /**
    * Clear entire cart
    */
-  async clearCart(userId: string): Promise<Cart> {
+  async clearCart(userId: string): Promise<CartResponse> {
     logger.info(`Clearing cart for user: ${userId}`);
 
     const response = await this.delete<Cart>(
-      `/api/cart/${userId}/items`
+      `/api/cart/${userId}`
     );
 
-    return response.data!;
+    return {
+      success: response.status === 200,
+      data: response.data!,
+    };
   }
 
   /**
    * Get cart summary/stats
    */
-  async getCartSummary(userId: string): Promise<{ itemCount: number; totalAmount: number }> {
+  async getCartSummary(userId: string): Promise<CartResponse> {
     logger.info(`Getting cart summary for user: ${userId}`);
 
-    const cart = await this.getCartItems(userId);
+    interface CartSummary {
+      itemCount: number;
+      totalItems: number;
+      totalAmount: number;
+    }
+
+    const response = await this.get<CartSummary>(
+      `/api/cart/${userId}/summary`
+    );
 
     return {
-      itemCount: cart.totalItems || 0,
-      totalAmount: cart.totalAmount || 0,
+      success: response.status === 200,
+      data: response.data as any || { itemCount: 0, totalItems: 0, totalAmount: 0 },
     };
   }
 
@@ -122,7 +145,8 @@ export class CartAPI extends BaseAPI {
   async itemExistsInCart(userId: string, productId: string): Promise<boolean> {
     logger.info(`Checking if product ${productId} exists in cart for user: ${userId}`);
 
-    const cart = await this.getCartItems(userId);
-    return cart.items?.some(item => item.id === productId) || false;
+    const response = await this.getCartItems(userId);
+    return response.data.items?.some(item => item.id === productId) || false;
   }
 }
+

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessibility Audit Report - MyBasket Lite</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+      line-height: 1.6; 
+      color: #333; 
+      background: #f5f5f5; 
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+    
+    header { 
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+      color: white; 
+      padding: 40px; 
+      border-radius: 8px; 
+      margin-bottom: 40px; 
+    }
+    header h1 { font-size: 2.5em; margin-bottom: 10px; }
+    header .meta { font-size: 0.95em; opacity: 0.9; }
+    
+    .summary { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+      gap: 20px; 
+      margin-bottom: 40px; 
+    }
+    .summary-card { 
+      background: white; 
+      padding: 20px; 
+      border-radius: 8px; 
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .summary-card h3 { 
+      font-size: 0.85em; 
+      text-transform: uppercase; 
+      color: #666; 
+      margin-bottom: 10px; 
+      letter-spacing: 0.5px;
+    }
+    .summary-card .value { 
+      font-size: 2.5em; 
+      font-weight: bold; 
+    }
+    .summary-card.critical .value { color: #dc2626; }
+    .summary-card.serious .value { color: #f97316; }
+    .summary-card.passed .value { color: #16a34a; }
+    
+    .violations-section { 
+      background: white; 
+      padding: 30px; 
+      border-radius: 8px; 
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+      margin-bottom: 30px; 
+    }
+    .violations-section h2 { 
+      font-size: 1.8em; 
+      margin-bottom: 20px; 
+      border-bottom: 3px solid #667eea; 
+      padding-bottom: 10px; 
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .badge { 
+      display: inline-block; 
+      padding: 4px 12px; 
+      border-radius: 20px; 
+      font-size: 0.75em; 
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .badge-critical { background: #dc2626; color: white; }
+    .badge-serious { background: #f97316; color: white; }
+    
+    .violation-item { 
+      padding: 15px; 
+      margin-bottom: 15px; 
+      border-left: 4px solid; 
+      border-radius: 4px; 
+      background: #f9fafb;
+    }
+    .violation-item.critical { 
+      border-color: #dc2626; 
+      background: #fee2e2;
+    }
+    .violation-item.serious { 
+      border-color: #f97316; 
+      background: #ffedd5;
+    }
+    
+    .violation-item h4 { 
+      margin-bottom: 8px; 
+      font-weight: 600; 
+    }
+    .violation-item .code { 
+      font-family: 'Courier New', monospace; 
+      background: rgba(0,0,0,0.05); 
+      padding: 2px 6px; 
+      border-radius: 3px; 
+      font-size: 0.9em; 
+    }
+    .violation-item .meta { 
+      font-size: 0.9em; 
+      color: #666; 
+      margin-top: 8px; 
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .violation-item .count { 
+      display: inline-block; 
+      background: rgba(0,0,0,0.1); 
+      padding: 2px 8px; 
+      border-radius: 12px; 
+      font-size: 0.85em; 
+    }
+    
+    .recommendations { 
+      background: #ecf0f1; 
+      padding: 20px; 
+      border-radius: 8px; 
+      margin-top: 30px; 
+      border-left: 4px solid #667eea; 
+    }
+    .recommendations h3 { 
+      margin-bottom: 15px; 
+      color: #667eea; 
+    }
+    .recommendations ul { 
+      margin-left: 20px; 
+    }
+    .recommendations li { 
+      margin-bottom: 10px; 
+    }
+    .recommendations a { 
+      color: #667eea; 
+      text-decoration: none; 
+    }
+    .recommendations a:hover { 
+      text-decoration: underline; 
+    }
+    
+    footer { 
+      text-align: center; 
+      margin-top: 40px; 
+      padding-top: 20px; 
+      border-top: 1px solid #e5e7eb; 
+      color: #666; 
+      font-size: 0.9em; 
+    }
+    
+    .empty-state {
+      text-align: center;
+      padding: 40px;
+      color: #16a34a;
+    }
+    .empty-state h3 {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>♿ Accessibility Audit Report</h1>
+      <p style="margin-bottom: 10px;">MyBasket Lite - WCAG 2.0 AA Compliance Analysis</p>
+      <div class="meta">Generated: 23/02/2026, 10:37:06 pm</div>
+    </header>
+
+    <div class="summary">
+      <div class="summary-card critical">
+        <h3>Critical Issues</h3>
+        <div class="value">0</div>
+      </div>
+      <div class="summary-card serious">
+        <h3>Serious Issues</h3>
+        <div class="value">1</div>
+      </div>
+      <div class="summary-card passed">
+        <h3>Pages Scanned</h3>
+        <div class="value">3</div>
+      </div>
+    </div>
+
+    
+
+    
+    <div class="violations-section">
+      <h2><span class="badge badge-serious">🟠 SERIOUS</span> Serious Violations (1)</h2>
+      <p style="margin-bottom: 20px; color: #666;">These issues should be addressed to improve accessibility.</p>
+      
+        <div class="violation-item serious">
+          <h4>Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds</h4>
+          <div><span class="code">color-contrast</span></div>
+          <div class="meta">
+            <span>📄 Main Page</span>
+            <span class="count">8 occurrences</span>
+          </div>
+          <div style="margin-top: 10px; font-size: 0.9em;">
+            <a href="https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=axe-puppeteer" target="_blank">Learn more →</a>
+          </div>
+        </div>
+      
+    </div>
+    
+
+    
+
+    <div class="recommendations">
+      <h3>🎯 Remediation Recommendations</h3>
+      <ul>
+        <li><strong>Add ARIA labels</strong> to interactive elements missing accessible names</li>
+        <li><strong>Improve color contrast</strong> to meet WCAG AA standards (4.5:1 for text, 3:1 for large text)</li>
+        <li><strong>Ensure keyboard navigation</strong> for all interactive components</li>
+        <li><strong>Add visible focus indicators</strong> for keyboard users</li>
+        <li><strong>Test with screen readers</strong> (NVDA, JAWS, VoiceOver)</li>
+        <li><strong>Implement alt text</strong> for all images and icons</li>
+        <li><strong>Use semantic HTML</strong> (&lt;button&gt;, &lt;nav&gt;, &lt;main&gt;)</li>
+        <li><strong>Ensure form labels</strong> are properly associated with inputs</li>
+      </ul>
+      <p style="margin-top: 20px;">
+        For more information, visit <a href="https://www.w3.org/WAI/WCAG21/quickref/" target="_blank">WCAG 2.1 Quick Reference</a>
+      </p>
+    </div>
+
+    <footer>
+      <p>✅ Accessibility audit completed successfully</p>
+      <p style="margin-top: 10px; font-size: 0.85em;">Audit ID: 2026-02-23T09-36-59-</p>
+    </footer>
+  </div>
+</body>
+</html>

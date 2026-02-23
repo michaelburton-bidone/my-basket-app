@@ -27,14 +27,14 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
           quantity: 2,
         };
 
-        const cart = await cartAPI.addItemToCart(userId, item);
+        const response = await cartAPI.addItemToCart(userId, item);
 
         // Assertions use auto-retrying expect() to handle minor network delays
-        expect(cart).toBeDefined();
-        expect(cart.userId).toBe(userId);
-        expect(cart.items).toBeDefined();
-        expect(Array.isArray(cart.items)).toBe(true);
-        expect(cart.items.length).toBeGreaterThan(0);
+        expect(response).toBeDefined();
+        expect(response.data?.userId).toBe(userId);
+        expect(response.data?.items).toBeDefined();
+        expect(Array.isArray(response.data?.items)).toBe(true);
+        expect(response.data?.items?.length).toBeGreaterThan(0);
       });
     });
 
@@ -72,8 +72,8 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
         const addResponse = await cartAPI.addItemToCart(userId, item);
 
         // Auto-retrying assertions verify item existence in cart
-        expect(addResponse.items.length).toBeGreaterThan(0);
-        const addedItem = addResponse.items.find(i => i.id === item.productId);
+        expect(addResponse.data?.items?.length).toBeGreaterThan(0);
+        const addedItem = addResponse.data?.items?.find(i => i.id === item.productId);
         expect(addedItem).toBeDefined();
       });
     });
@@ -89,8 +89,12 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
         const cart = await cartAPI.addItemToCart(userId, item);
         
         // Auto-retrying assertions verify price calculation accuracy
-        expect(cart.totalAmount).toBeGreaterThan(0);
-        expect(cart.totalAmount).toBe(7.98);
+        expect(cart.data).toBeDefined();
+        expect(cart.data?.totalAmount).toBeDefined();
+        expect(cart.data?.totalAmount).toBeGreaterThan(0);
+        // Allow for floating point precision: 2 * 3.99 = 7.98
+        // Use toBeCloseTo for better floating point comparison
+        expect(cart.data?.totalAmount).toBeCloseTo(7.98, 2);
       });
     });
 
@@ -104,7 +108,7 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
 
         const cart = await cartAPI.addItemToCart(userId, item);
         
-        const addedItem = cart.items?.find(
+        const addedItem = cart.data?.items?.find(
           (i) => i.id === item.productId
         );
         // Auto-retrying assertions ensure item structure is correct
@@ -126,8 +130,8 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
         const cart = await cartAPI.addItemToCart(userId, item);
         
         // Auto-retrying assertions verify all product fields populated
-        expect(cart.items).toBeDefined();
-        const addedItem = cart.items?.[0];
+        expect(cart.data?.items).toBeDefined();
+        const addedItem = cart.data?.items?.[0];
         expect(addedItem?.id).toBe(item.productId);
         expect(addedItem?.name).toBeDefined();
         expect(addedItem?.price).toBeDefined();
@@ -149,13 +153,13 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
         const cart = await cartAPI.addItemToCart(userId, item);
 
         // Auto-retrying assertions verify all required fields exist
-        expect(cart).toHaveProperty('id');
-        expect(cart).toHaveProperty('userId');
-        expect(cart).toHaveProperty('items');
-        expect(cart).toHaveProperty('totalAmount');
-        expect(cart).toHaveProperty('totalItems');
-        expect(cart).toHaveProperty('createdAt');
-        expect(cart).toHaveProperty('updatedAt');
+        expect(cart.data).toHaveProperty('id');
+        expect(cart.data).toHaveProperty('userId');
+        expect(cart.data).toHaveProperty('items');
+        expect(cart.data).toHaveProperty('totalAmount');
+        expect(cart.data).toHaveProperty('totalItems');
+        expect(cart.data).toHaveProperty('createdAt');
+        expect(cart.data).toHaveProperty('updatedAt');
       });
     });
 
@@ -172,11 +176,11 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
         const cart = await cartAPI.addItemToCart(userId, item);
 
         // Auto-retrying assertions verify type consistency
-        expect(typeof cart.id).toBe('string');
-        expect(typeof cart.userId).toBe('string');
-        expect(Array.isArray(cart.items)).toBe(true);
-        expect(typeof cart.totalAmount).toBe('number');
-        expect(typeof cart.totalItems).toBe('number');
+        expect(typeof cart.data?.id).toBe('string');
+        expect(typeof cart.data?.userId).toBe('string');
+        expect(Array.isArray(cart.data?.items)).toBe(true);
+        expect(typeof cart.data?.totalAmount).toBe('number');
+        expect(typeof cart.data?.totalItems).toBe('number');
       });
     });
 
@@ -192,7 +196,7 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
 
         const cart = await cartAPI.addItemToCart(userId, item);
         
-        const cartItem = cart.items?.[0];
+        const cartItem = cart.data?.items?.[0];
         if (cartItem) {
           // Auto-retrying assertions validate nested item structure
           expect(cartItem).toHaveProperty('id');
@@ -218,7 +222,7 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
           quantity: 2,
         });
         // Auto-retrying assertions verify first item added
-        expect(response1.items.length).toBe(1);
+        expect(response1.data?.items?.length).toBe(1);
       });
 
       await test.step('Add second different item to cart', async () => {
@@ -235,7 +239,7 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
           quantity: 3,
         });
         // Auto-retrying assertions verify both items present
-        expect(response2.items.length).toBe(2);
+        expect(response2.data?.items?.length).toBe(2);
       });
     });
 
@@ -250,8 +254,10 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
           productId: testProducts.apples.id,
           quantity: 2,
         });
-        // Auto-retrying assertions verify first item price
-        expect(priceAfterFirst.totalAmount).toBe(7.98);
+        // Auto-retrying assertions verify first item price (allow floating point precision)
+        expect(priceAfterFirst.data).toBeDefined();
+        expect(priceAfterFirst.data?.totalAmount).toBeDefined();
+        expect(priceAfterFirst.data?.totalAmount).toBeCloseTo(7.98, 2);
       });
 
       await test.step('Add second product and verify cumulative price', async () => {
@@ -268,8 +274,12 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
           quantity: 1,
         });
         // Auto-retrying assertions verify price accumulation
-        expect(priceAfterSecond.totalAmount).toBeGreaterThan(priceAfterFirst.totalAmount);
-        expect(priceAfterSecond.totalAmount).toBe(13.97);
+        expect(priceAfterSecond.data).toBeDefined();
+        expect(priceAfterSecond.data?.totalAmount).toBeDefined();
+        expect(priceAfterFirst.data?.totalAmount).toBeDefined();
+        expect(priceAfterSecond.data?.totalAmount).toBeGreaterThan(priceAfterFirst.data?.totalAmount!);
+        // Total should be $13.97 (7.98 + 5.99) with floating point precision
+        expect(priceAfterSecond.data?.totalAmount).toBeCloseTo(13.97, 2);
       });
     });
 
@@ -285,7 +295,7 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
           quantity: 1,
         });
         // Auto-retrying assertions verify first addition
-        expect(firstAdd.totalAmount).toBeGreaterThan(0);
+        expect(firstAdd.data?.totalAmount).toBeGreaterThan(0);
       });
 
       await test.step('Add same item again and verify quantity increases', async () => {
@@ -294,17 +304,17 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
           productId: testProducts.bread.id,
           quantity: 1,
         });
-        const priceFirst = firstAdd.totalAmount;
+        const priceFirst = firstAdd.data?.totalAmount!;
 
         // Add same item again
         const secondAdd = await cartAPI.addItemToCart(userId, {
           productId: testProducts.bread.id,
           quantity: 2,
         });
-        const priceSecond = secondAdd.totalAmount;
+        const priceSecond = secondAdd.data?.totalAmount!;
 
         // Quantity should be 3 (1 + 2)
-        const updatedItem = secondAdd.items?.find(
+        const updatedItem = secondAdd.data?.items?.find(
           (i) => i.id === testProducts.bread.id
         );
         // Auto-retrying assertions verify quantity accumulation
@@ -343,7 +353,7 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
           productId: testProducts.almondMilk.id,
         } as any);
 
-        const addedItem = cart.items?.find(
+        const addedItem = cart.data?.items?.find(
           (item) => item.id === testProducts.almondMilk.id
         );
         // Auto-retrying assertions verify default quantity applied
@@ -449,7 +459,7 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
           quantity: requestedQuantity,
         });
 
-        const addedItem = cart.items?.find(
+        const addedItem = cart.data?.items?.find(
           (item) => item.id === testProducts.spinach.id
         );
 
@@ -471,7 +481,7 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
           quantity,
         });
 
-        const addedItem = cart.items?.find(
+        const addedItem = cart.data?.items?.find(
           (item) => item.id === productId
         );
 
@@ -494,7 +504,7 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
           quantity: 2,
         });
         // Auto-retrying assertions verify count calculation
-        expect(cart1.totalItems).toBe(2);
+        expect(cart1.data?.totalItems).toBe(2);
       });
 
       await test.step('Add second item and verify totalItems updates', async () => {
@@ -510,7 +520,7 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
           quantity: 1,
         });
         // Auto-retrying assertions verify accumulated count
-        expect(cart2.totalItems).toBe(3);
+        expect(cart2.data?.totalItems).toBe(3);
       });
 
       await test.step('Add to existing item and verify totalItems', async () => {
@@ -530,16 +540,16 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
           quantity: 3,
         });
         // Auto-retrying assertions verify correct total
-        expect(cart3.totalItems).toBe(6); // 5 apples + 1 bread
+        expect(cart3.data?.totalItems).toBe(6); // 5 apples + 1 bread
       });
     });
 
     test('should calculate correct total with multiple quantities', async ({
       cartAPI,
     }) => {
-      await test.step('Add first product and verify price', async () => {
-        const userId = 'test-user-calc-' + Date.now();
+      const userId = 'test-user-calc-' + Date.now();
 
+      await test.step('Add first product and verify price', async () => {
         // Add item 1: 2 apples @ $3.99 = $7.98
         await cartAPI.addItemToCart(userId, {
           productId: testProducts.apples.id,
@@ -548,13 +558,6 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
       });
 
       await test.step('Add second product and verify cumulative calculation', async () => {
-        const userId = 'test-user-calc-' + Date.now();
-        // Add item 1: 2 apples @ $3.99 = $7.98
-        await cartAPI.addItemToCart(userId, {
-          productId: testProducts.apples.id,
-          quantity: 2,
-        });
-
         // Add item 2: 1 eggs @ $5.99 = $5.99
         const cart = await cartAPI.addItemToCart(userId, {
           productId: testProducts.eggs.id,
@@ -562,8 +565,10 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
         });
 
         // Auto-retrying assertions verify calculation accuracy
-        // Total should be $13.97
-        expect(cart.totalAmount).toBe(13.97);
+        // Total should be $13.97 (7.98 + 5.99)
+        expect(cart.data).toBeDefined();
+        expect(cart.data?.totalAmount).toBeDefined();
+        expect(cart.data?.totalAmount).toBeCloseTo(13.97, 2);
       });
     });
   });
@@ -579,7 +584,7 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
           quantity: largeQuantity,
         });
 
-        const item = cart.items?.find(
+        const item = cart.data?.items?.find(
           (i) => i.id === testProducts.spinach.id
         );
         // Auto-retrying assertions verify large quantity handling
@@ -634,7 +639,7 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
         // Auto-retrying assertions verify race condition handling
         // At least one should have all items
         const lastResult = results[results.length - 1];
-        expect(lastResult.items.length).toBeGreaterThanOrEqual(1);
+        expect(lastResult.data?.items?.length).toBeGreaterThanOrEqual(1);
       });
     });
   });
@@ -710,10 +715,10 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
 
         // Auto-retrying assertions verify array structure
         expect(Array.isArray(body.items)).toBe(true);
-        expect(body.items.length).toBeGreaterThan(0);
+        expect(body.items?.length).toBeGreaterThan(0);
 
         // Verify item structure
-        const item = body.items[0];
+        const item = body.items?.[0];
         expect(item.id).toBeDefined();
         expect(item.quantity).toBeDefined();
         expect(item.price).toBeDefined();
@@ -741,8 +746,8 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
         // Auto-retrying assertions verify type safety
         expect(typeof body.totalItems).toBe('number');
         expect(typeof body.totalAmount).toBe('number');
-        expect(typeof body.items[0].quantity).toBe('number');
-        expect(typeof body.items[0].price).toBe('number');
+        expect(typeof body.items?.[0].quantity).toBe('number');
+        expect(typeof body.items?.[0].price).toBe('number');
       });
     });
 
@@ -768,7 +773,7 @@ test.describe('Cart Addition - POST /api/cart/:userId/items', () => {
         expect(body.userId).toBe(userId);
         expect(body.totalItems).toBeGreaterThan(0);
         expect(body.totalAmount).toBeGreaterThan(0);
-        expect(body.items[0].quantity).toBe(3);
+        expect(body.items?.[0].quantity).toBe(3);
       });
     });
   });

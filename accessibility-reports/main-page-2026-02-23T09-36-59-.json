@@ -1,0 +1,1155 @@
+{
+  "testEngine": {
+    "name": "axe-core",
+    "version": "4.11.1"
+  },
+  "testRunner": {
+    "name": "axe"
+  },
+  "testEnvironment": {
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.0.0 Safari/537.36",
+    "windowWidth": 800,
+    "windowHeight": 600,
+    "orientationAngle": 0,
+    "orientationType": "portrait-primary"
+  },
+  "timestamp": "2026-02-23T09:37:02.222Z",
+  "url": "http://localhost:9002/",
+  "toolOptions": {
+    "runOnly": {
+      "type": "tag",
+      "values": [
+        "wcag2aa"
+      ]
+    },
+    "reporter": "v1"
+  },
+  "inapplicable": [
+    {
+      "id": "valid-lang",
+      "impact": null,
+      "tags": [
+        "cat.language",
+        "wcag2aa",
+        "wcag312",
+        "TTv5",
+        "TT11.b",
+        "EN-301-549",
+        "EN-9.3.1.2",
+        "ACT",
+        "RGAAv4",
+        "RGAA-8.8.1"
+      ],
+      "description": "Ensure lang attributes have valid values",
+      "help": "lang attribute must have a valid value",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/valid-lang?application=axe-puppeteer",
+      "nodes": []
+    }
+  ],
+  "passes": [
+    {
+      "id": "color-contrast",
+      "impact": "serious",
+      "tags": [
+        "cat.color",
+        "wcag2aa",
+        "wcag143",
+        "TTv5",
+        "TT13.c",
+        "EN-301-549",
+        "EN-9.1.4.3",
+        "ACT",
+        "RGAAv4",
+        "RGAA-3.2.1"
+      ],
+      "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+      "help": "Elements must meet minimum color contrast ratio thresholds",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=axe-puppeteer",
+      "nodes": [
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#1d301d",
+                "bgColor": "#f3fcf3",
+                "contrastRatio": 13.41,
+                "fontSize": "13.5pt (18px)",
+                "fontWeight": "bold",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.41"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<span class=\"font-bold sm:inline-block text-lg\">MyBasket Lite</span>",
+          "target": [
+            ".sm\\:inline-block"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#1d301d",
+                "bgColor": "#f3fcf3",
+                "contrastRatio": 13.41,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.41"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<button class=\"inline-flex items-ce...\">",
+          "target": [
+            "a[href=\"/\"] > .hover\\:bg-accent.hover\\:text-accent-foreground.py-2"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#1d301d",
+                "bgColor": "#f3fcf3",
+                "contrastRatio": 13.41,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.41"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<button class=\"inline-flex items-ce...\">",
+          "target": [
+            "a[href$=\"orders\"] > .hover\\:bg-accent.hover\\:text-accent-foreground.py-2"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#1d301d",
+                "bgColor": "#f3fcf3",
+                "contrastRatio": 13.41,
+                "fontSize": "27.0pt (36px)",
+                "fontWeight": "bold",
+                "expectedContrastRatio": "3:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.41"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<h1 class=\"text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-8 text-center\">Welcome to MyBasket Lite!</h1>",
+          "target": [
+            "h1"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#1d301d",
+                "bgColor": "#fbfefb",
+                "contrastRatio": 13.84,
+                "fontSize": "13.5pt (18px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.84"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<div class=\"tracking-tight text-lg font-semibold mb-1\">Organic Apples</div>",
+          "target": [
+            ".bg-card.text-card-foreground.rounded-lg:nth-child(1) > .flex-grow.p-4 > .font-semibold.mb-1.tracking-tight"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#437043",
+                "bgColor": "#fbfefb",
+                "contrastRatio": 5.68,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 5.68"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<div class=\"text-sm text-muted-foreground mb-2 h-10 overflow-hidden\">Crisp and juicy organic apples, perfect for snacking or baking.</div>",
+          "target": [
+            ".bg-card.text-card-foreground.rounded-lg:nth-child(1) > .flex-grow.p-4 > .mb-2.text-muted-foreground.overflow-hidden"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#1b2013",
+                "bgColor": "#abff2e",
+                "contrastRatio": 13.52,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.52"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<button class=\"inline-flex items-ce...\" data-testid=\"add-to-cart-btn-1\">",
+          "target": [
+            "button[data-testid=\"add-to-cart-btn-1\"]"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#1d301d",
+                "bgColor": "#fbfefb",
+                "contrastRatio": 13.84,
+                "fontSize": "13.5pt (18px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.84"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<div class=\"tracking-tight text-lg font-semibold mb-1\">Whole Wheat Bread</div>",
+          "target": [
+            ".bg-card.text-card-foreground.rounded-lg:nth-child(2) > .flex-grow.p-4 > .font-semibold.mb-1.tracking-tight"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#437043",
+                "bgColor": "#fbfefb",
+                "contrastRatio": 5.68,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 5.68"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<div class=\"text-sm text-muted-foreground mb-2 h-10 overflow-hidden\">Freshly baked whole wheat bread, rich in fiber.</div>",
+          "target": [
+            ".bg-card.text-card-foreground.rounded-lg:nth-child(2) > .flex-grow.p-4 > .mb-2.text-muted-foreground.overflow-hidden"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#1b2013",
+                "bgColor": "#abff2e",
+                "contrastRatio": 13.52,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.52"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<button class=\"inline-flex items-ce...\" data-testid=\"add-to-cart-btn-2\">",
+          "target": [
+            "button[data-testid=\"add-to-cart-btn-2\"]"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#1d301d",
+                "bgColor": "#fbfefb",
+                "contrastRatio": 13.84,
+                "fontSize": "13.5pt (18px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.84"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<div class=\"tracking-tight text-lg font-semibold mb-1\">Free-Range Eggs</div>",
+          "target": [
+            ".bg-card.text-card-foreground.rounded-lg:nth-child(3) > .flex-grow.p-4 > .font-semibold.mb-1.tracking-tight"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#437043",
+                "bgColor": "#fbfefb",
+                "contrastRatio": 5.68,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 5.68"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<div class=\"text-sm text-muted-foreground mb-2 h-10 overflow-hidden\">A dozen large free-range eggs, great for breakfast.</div>",
+          "target": [
+            ".bg-card.text-card-foreground.rounded-lg:nth-child(3) > .flex-grow.p-4 > .mb-2.text-muted-foreground.overflow-hidden"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#1b2013",
+                "bgColor": "#abff2e",
+                "contrastRatio": 13.52,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.52"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<button class=\"inline-flex items-ce...\" data-testid=\"add-to-cart-btn-3\">",
+          "target": [
+            "button[data-testid=\"add-to-cart-btn-3\"]"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#1d301d",
+                "bgColor": "#fbfefb",
+                "contrastRatio": 13.84,
+                "fontSize": "13.5pt (18px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.84"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<div class=\"tracking-tight text-lg font-semibold mb-1\">Organic Spinach</div>",
+          "target": [
+            ".bg-card.text-card-foreground.rounded-lg:nth-child(4) > .flex-grow.p-4 > .font-semibold.mb-1.tracking-tight"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#437043",
+                "bgColor": "#fbfefb",
+                "contrastRatio": 5.68,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 5.68"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<div class=\"text-sm text-muted-foreground mb-2 h-10 overflow-hidden\">A bag of fresh organic spinach, packed with nutrients.</div>",
+          "target": [
+            ".bg-card.text-card-foreground.rounded-lg:nth-child(4) > .flex-grow.p-4 > .mb-2.text-muted-foreground.overflow-hidden"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#1b2013",
+                "bgColor": "#abff2e",
+                "contrastRatio": 13.52,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.52"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<button class=\"inline-flex items-ce...\" data-testid=\"add-to-cart-btn-4\">",
+          "target": [
+            "button[data-testid=\"add-to-cart-btn-4\"]"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#1d301d",
+                "bgColor": "#fbfefb",
+                "contrastRatio": 13.84,
+                "fontSize": "13.5pt (18px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.84"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<div class=\"tracking-tight text-lg font-semibold mb-1\">Almond Milk</div>",
+          "target": [
+            ".bg-card.text-card-foreground.rounded-lg:nth-child(5) > .flex-grow.p-4 > .font-semibold.mb-1.tracking-tight"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#437043",
+                "bgColor": "#fbfefb",
+                "contrastRatio": 5.68,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 5.68"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<div class=\"text-sm text-muted-foreground mb-2 h-10 overflow-hidden\">Unsweetened almond milk, a great dairy-free alternative.</div>",
+          "target": [
+            ".bg-card.text-card-foreground.rounded-lg:nth-child(5) > .flex-grow.p-4 > .mb-2.text-muted-foreground.overflow-hidden"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#1b2013",
+                "bgColor": "#abff2e",
+                "contrastRatio": 13.52,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.52"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<button class=\"inline-flex items-ce...\" data-testid=\"add-to-cart-btn-5\">",
+          "target": [
+            "button[data-testid=\"add-to-cart-btn-5\"]"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#1d301d",
+                "bgColor": "#fbfefb",
+                "contrastRatio": 13.84,
+                "fontSize": "13.5pt (18px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.84"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<div class=\"tracking-tight text-lg font-semibold mb-1\">Chicken Breast</div>",
+          "target": [
+            ".bg-card.text-card-foreground.rounded-lg:nth-child(6) > .flex-grow.p-4 > .font-semibold.mb-1.tracking-tight"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#437043",
+                "bgColor": "#fbfefb",
+                "contrastRatio": 5.68,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 5.68"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<div class=\"text-sm text-muted-foreground mb-2 h-10 overflow-hidden\">Boneless, skinless chicken breast, lean and versatile.</div>",
+          "target": [
+            ".bg-card.text-card-foreground.rounded-lg:nth-child(6) > .flex-grow.p-4 > .mb-2.text-muted-foreground.overflow-hidden"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#1b2013",
+                "bgColor": "#abff2e",
+                "contrastRatio": 13.52,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.52"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<button class=\"inline-flex items-ce...\" data-testid=\"add-to-cart-btn-6\">",
+          "target": [
+            "button[data-testid=\"add-to-cart-btn-6\"]"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#1d301d",
+                "bgColor": "#fbfefb",
+                "contrastRatio": 13.84,
+                "fontSize": "13.5pt (18px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.84"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<div class=\"tracking-tight text-lg font-semibold mb-1\">Brown Rice</div>",
+          "target": [
+            ".bg-card.text-card-foreground.rounded-lg:nth-child(7) > .flex-grow.p-4 > .font-semibold.mb-1.tracking-tight"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#437043",
+                "bgColor": "#fbfefb",
+                "contrastRatio": 5.68,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 5.68"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<div class=\"text-sm text-muted-foreground mb-2 h-10 overflow-hidden\">Long-grain brown rice, a healthy whole grain option.</div>",
+          "target": [
+            ".bg-card.text-card-foreground.rounded-lg:nth-child(7) > .flex-grow.p-4 > .mb-2.text-muted-foreground.overflow-hidden"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#1b2013",
+                "bgColor": "#abff2e",
+                "contrastRatio": 13.52,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.52"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<button class=\"inline-flex items-ce...\" data-testid=\"add-to-cart-btn-7\">",
+          "target": [
+            "button[data-testid=\"add-to-cart-btn-7\"]"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#1d301d",
+                "bgColor": "#fbfefb",
+                "contrastRatio": 13.84,
+                "fontSize": "13.5pt (18px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.84"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<div class=\"tracking-tight text-lg font-semibold mb-1\">Greek Yogurt</div>",
+          "target": [
+            ".bg-card.text-card-foreground.rounded-lg:nth-child(8) > .flex-grow.p-4 > .font-semibold.mb-1.tracking-tight"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#437043",
+                "bgColor": "#fbfefb",
+                "contrastRatio": 5.68,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 5.68"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<div class=\"text-sm text-muted-foreground mb-2 h-10 overflow-hidden\">Creamy Greek yogurt, high in protein and probiotics.</div>",
+          "target": [
+            ".bg-card.text-card-foreground.rounded-lg:nth-child(8) > .flex-grow.p-4 > .mb-2.text-muted-foreground.overflow-hidden"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#1b2013",
+                "bgColor": "#abff2e",
+                "contrastRatio": 13.52,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.52"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<button class=\"inline-flex items-ce...\" data-testid=\"add-to-cart-btn-8\">",
+          "target": [
+            "button[data-testid=\"add-to-cart-btn-8\"]"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#437043",
+                "bgColor": "#f3fcf3",
+                "contrastRatio": 5.5,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 5.5"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<p class=\"text-center text-sm leading-loose text-muted-foreground md:text-left\">",
+          "target": [
+            ".leading-loose"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#437043",
+                "bgColor": "#f3fcf3",
+                "contrastRatio": 5.5,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 5.5"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<a href=\"https://firebase.google.com/docs/studio\" target=\"_blank\" rel=\"noreferrer\" class=\"font-medium underline underline-offset-4\">Firebase Studio</a>",
+          "target": [
+            ".underline"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "meta-viewport",
+      "impact": null,
+      "tags": [
+        "cat.sensory-and-visual-cues",
+        "wcag2aa",
+        "wcag144",
+        "EN-301-549",
+        "EN-9.1.4.4",
+        "ACT",
+        "RGAAv4",
+        "RGAA-10.4.2"
+      ],
+      "description": "Ensure <meta name=\"viewport\"> does not disable text scaling and zooming",
+      "help": "Zooming and scaling must not be disabled",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/meta-viewport?application=axe-puppeteer",
+      "nodes": [
+        {
+          "any": [
+            {
+              "id": "meta-viewport",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "moderate",
+              "message": "<meta> tag does not disable zooming on mobile devices"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">",
+          "target": [
+            "meta[name=\"viewport\"]"
+          ]
+        }
+      ]
+    }
+  ],
+  "incomplete": [],
+  "violations": [
+    {
+      "id": "color-contrast",
+      "impact": "serious",
+      "tags": [
+        "cat.color",
+        "wcag2aa",
+        "wcag143",
+        "TTv5",
+        "TT13.c",
+        "EN-301-549",
+        "EN-9.1.4.3",
+        "ACT",
+        "RGAAv4",
+        "RGAA-3.2.1"
+      ],
+      "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+      "help": "Elements must meet minimum color contrast ratio thresholds",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=axe-puppeteer",
+      "nodes": [
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#4fe34f",
+                "bgColor": "#fbfefb",
+                "contrastRatio": 1.66,
+                "fontSize": "15.0pt (20px)",
+                "fontWeight": "bold",
+                "messageKey": null,
+                "expectedContrastRatio": "3:1"
+              },
+              "relatedNodes": [
+                {
+                  "html": "<div class=\"border bg-card text-card-foreground flex flex-col overflow-hidden rounded-lg shadow-lg transition-all hover:shadow-xl\" data-testid=\"product-item\">",
+                  "target": [
+                    ".bg-card.text-card-foreground.rounded-lg:nth-child(1)"
+                  ]
+                }
+              ],
+              "impact": "serious",
+              "message": "Element has insufficient color contrast of 1.66 (foreground color: #4fe34f, background color: #fbfefb, font size: 15.0pt (20px), font weight: bold). Expected contrast ratio of 3:1"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": "serious",
+          "html": "<p class=\"text-xl font-bold text-primary\">$<!-- -->3.99</p>",
+          "target": [
+            ".bg-card.text-card-foreground.rounded-lg:nth-child(1) > .flex-grow.p-4 > .text-xl"
+          ],
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.66 (foreground color: #4fe34f, background color: #fbfefb, font size: 15.0pt (20px), font weight: bold). Expected contrast ratio of 3:1"
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#4fe34f",
+                "bgColor": "#fbfefb",
+                "contrastRatio": 1.66,
+                "fontSize": "15.0pt (20px)",
+                "fontWeight": "bold",
+                "messageKey": null,
+                "expectedContrastRatio": "3:1"
+              },
+              "relatedNodes": [
+                {
+                  "html": "<div class=\"border bg-card text-card-foreground flex flex-col overflow-hidden rounded-lg shadow-lg transition-all hover:shadow-xl\" data-testid=\"product-item\">",
+                  "target": [
+                    ".bg-card.text-card-foreground.rounded-lg:nth-child(2)"
+                  ]
+                }
+              ],
+              "impact": "serious",
+              "message": "Element has insufficient color contrast of 1.66 (foreground color: #4fe34f, background color: #fbfefb, font size: 15.0pt (20px), font weight: bold). Expected contrast ratio of 3:1"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": "serious",
+          "html": "<p class=\"text-xl font-bold text-primary\">$<!-- -->4.49</p>",
+          "target": [
+            ".bg-card.text-card-foreground.rounded-lg:nth-child(2) > .flex-grow.p-4 > .text-xl"
+          ],
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.66 (foreground color: #4fe34f, background color: #fbfefb, font size: 15.0pt (20px), font weight: bold). Expected contrast ratio of 3:1"
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#4fe34f",
+                "bgColor": "#fbfefb",
+                "contrastRatio": 1.66,
+                "fontSize": "15.0pt (20px)",
+                "fontWeight": "bold",
+                "messageKey": null,
+                "expectedContrastRatio": "3:1"
+              },
+              "relatedNodes": [
+                {
+                  "html": "<div class=\"border bg-card text-card-foreground flex flex-col overflow-hidden rounded-lg shadow-lg transition-all hover:shadow-xl\" data-testid=\"product-item\">",
+                  "target": [
+                    ".bg-card.text-card-foreground.rounded-lg:nth-child(3)"
+                  ]
+                }
+              ],
+              "impact": "serious",
+              "message": "Element has insufficient color contrast of 1.66 (foreground color: #4fe34f, background color: #fbfefb, font size: 15.0pt (20px), font weight: bold). Expected contrast ratio of 3:1"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": "serious",
+          "html": "<p class=\"text-xl font-bold text-primary\">$<!-- -->5.99</p>",
+          "target": [
+            ".bg-card.text-card-foreground.rounded-lg:nth-child(3) > .flex-grow.p-4 > .text-xl"
+          ],
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.66 (foreground color: #4fe34f, background color: #fbfefb, font size: 15.0pt (20px), font weight: bold). Expected contrast ratio of 3:1"
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#4fe34f",
+                "bgColor": "#fbfefb",
+                "contrastRatio": 1.66,
+                "fontSize": "15.0pt (20px)",
+                "fontWeight": "bold",
+                "messageKey": null,
+                "expectedContrastRatio": "3:1"
+              },
+              "relatedNodes": [
+                {
+                  "html": "<div class=\"border bg-card text-card-foreground flex flex-col overflow-hidden rounded-lg shadow-lg transition-all hover:shadow-xl\" data-testid=\"product-item\">",
+                  "target": [
+                    ".bg-card.text-card-foreground.rounded-lg:nth-child(4)"
+                  ]
+                }
+              ],
+              "impact": "serious",
+              "message": "Element has insufficient color contrast of 1.66 (foreground color: #4fe34f, background color: #fbfefb, font size: 15.0pt (20px), font weight: bold). Expected contrast ratio of 3:1"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": "serious",
+          "html": "<p class=\"text-xl font-bold text-primary\">$<!-- -->2.99</p>",
+          "target": [
+            ".bg-card.text-card-foreground.rounded-lg:nth-child(4) > .flex-grow.p-4 > .text-xl"
+          ],
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.66 (foreground color: #4fe34f, background color: #fbfefb, font size: 15.0pt (20px), font weight: bold). Expected contrast ratio of 3:1"
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#4fe34f",
+                "bgColor": "#fbfefb",
+                "contrastRatio": 1.66,
+                "fontSize": "15.0pt (20px)",
+                "fontWeight": "bold",
+                "messageKey": null,
+                "expectedContrastRatio": "3:1"
+              },
+              "relatedNodes": [
+                {
+                  "html": "<div class=\"border bg-card text-card-foreground flex flex-col overflow-hidden rounded-lg shadow-lg transition-all hover:shadow-xl\" data-testid=\"product-item\">",
+                  "target": [
+                    ".bg-card.text-card-foreground.rounded-lg:nth-child(5)"
+                  ]
+                }
+              ],
+              "impact": "serious",
+              "message": "Element has insufficient color contrast of 1.66 (foreground color: #4fe34f, background color: #fbfefb, font size: 15.0pt (20px), font weight: bold). Expected contrast ratio of 3:1"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": "serious",
+          "html": "<p class=\"text-xl font-bold text-primary\">$<!-- -->3.79</p>",
+          "target": [
+            ".bg-card.text-card-foreground.rounded-lg:nth-child(5) > .flex-grow.p-4 > .text-xl"
+          ],
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.66 (foreground color: #4fe34f, background color: #fbfefb, font size: 15.0pt (20px), font weight: bold). Expected contrast ratio of 3:1"
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#4fe34f",
+                "bgColor": "#fbfefb",
+                "contrastRatio": 1.66,
+                "fontSize": "15.0pt (20px)",
+                "fontWeight": "bold",
+                "messageKey": null,
+                "expectedContrastRatio": "3:1"
+              },
+              "relatedNodes": [
+                {
+                  "html": "<div class=\"border bg-card text-card-foreground flex flex-col overflow-hidden rounded-lg shadow-lg transition-all hover:shadow-xl\" data-testid=\"product-item\">",
+                  "target": [
+                    ".bg-card.text-card-foreground.rounded-lg:nth-child(6)"
+                  ]
+                }
+              ],
+              "impact": "serious",
+              "message": "Element has insufficient color contrast of 1.66 (foreground color: #4fe34f, background color: #fbfefb, font size: 15.0pt (20px), font weight: bold). Expected contrast ratio of 3:1"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": "serious",
+          "html": "<p class=\"text-xl font-bold text-primary\">$<!-- -->9.99</p>",
+          "target": [
+            ".bg-card.text-card-foreground.rounded-lg:nth-child(6) > .flex-grow.p-4 > .text-xl"
+          ],
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.66 (foreground color: #4fe34f, background color: #fbfefb, font size: 15.0pt (20px), font weight: bold). Expected contrast ratio of 3:1"
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#4fe34f",
+                "bgColor": "#fbfefb",
+                "contrastRatio": 1.66,
+                "fontSize": "15.0pt (20px)",
+                "fontWeight": "bold",
+                "messageKey": null,
+                "expectedContrastRatio": "3:1"
+              },
+              "relatedNodes": [
+                {
+                  "html": "<div class=\"border bg-card text-card-foreground flex flex-col overflow-hidden rounded-lg shadow-lg transition-all hover:shadow-xl\" data-testid=\"product-item\">",
+                  "target": [
+                    ".bg-card.text-card-foreground.rounded-lg:nth-child(7)"
+                  ]
+                }
+              ],
+              "impact": "serious",
+              "message": "Element has insufficient color contrast of 1.66 (foreground color: #4fe34f, background color: #fbfefb, font size: 15.0pt (20px), font weight: bold). Expected contrast ratio of 3:1"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": "serious",
+          "html": "<p class=\"text-xl font-bold text-primary\">$<!-- -->2.49</p>",
+          "target": [
+            ".bg-card.text-card-foreground.rounded-lg:nth-child(7) > .flex-grow.p-4 > .text-xl"
+          ],
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.66 (foreground color: #4fe34f, background color: #fbfefb, font size: 15.0pt (20px), font weight: bold). Expected contrast ratio of 3:1"
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#4fe34f",
+                "bgColor": "#fbfefb",
+                "contrastRatio": 1.66,
+                "fontSize": "15.0pt (20px)",
+                "fontWeight": "bold",
+                "messageKey": null,
+                "expectedContrastRatio": "3:1"
+              },
+              "relatedNodes": [
+                {
+                  "html": "<div class=\"border bg-card text-card-foreground flex flex-col overflow-hidden rounded-lg shadow-lg transition-all hover:shadow-xl\" data-testid=\"product-item\">",
+                  "target": [
+                    ".bg-card.text-card-foreground.rounded-lg:nth-child(8)"
+                  ]
+                }
+              ],
+              "impact": "serious",
+              "message": "Element has insufficient color contrast of 1.66 (foreground color: #4fe34f, background color: #fbfefb, font size: 15.0pt (20px), font weight: bold). Expected contrast ratio of 3:1"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": "serious",
+          "html": "<p class=\"text-xl font-bold text-primary\">$<!-- -->4.99</p>",
+          "target": [
+            ".bg-card.text-card-foreground.rounded-lg:nth-child(8) > .flex-grow.p-4 > .text-xl"
+          ],
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.66 (foreground color: #4fe34f, background color: #fbfefb, font size: 15.0pt (20px), font weight: bold). Expected contrast ratio of 3:1"
+        }
+      ]
+    }
+  ]
+}

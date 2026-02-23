@@ -5,6 +5,7 @@ export interface Product {
   description: string;
   image: string;
   dataAiHint: string;
+  discount?: number; // 0-100 percentage
 }
 
 export interface CartItem extends Product {

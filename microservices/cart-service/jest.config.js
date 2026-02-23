@@ -9,4 +9,19 @@ module.exports = {
     '!src/**/*.test.ts',
     '!src/**/*.d.ts',
   ],
+  transform: {
+    '^.+\\.tsx?$': ['ts-jest', {
+      useESM: true,
+      tsconfig: {
+        module: 'commonjs',
+        esModuleInterop: true,
+      },
+    }],
+  },
+  transformIgnorePatterns: [
+    'node_modules/(?!(@faker-js)/)',
+  ],
+  moduleNameMapper: {
+    '^(\\.{1,2}/.*)\\.js$': '$1',
+  },
 };
